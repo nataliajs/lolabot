@@ -18,17 +18,18 @@ server.post('/api/messages', connector.listen());
 const inMemoryStorage = new builder.MemoryBotStorage();
 
 const bot = new builder.UniversalBot(connector, [
-  function(session){
+/*  function(session){
     session.beginDialog('greetings:/');
-  },
-  /*function(session){
+  },*/
+  session=>{
     session.beginDialog('actions:/');
-  }*/
+  }
 ]).set('storage', inMemoryStorage);
 
 //Sub-Dialogs
 bot.library(require('./dialogs/greetings'));
 bot.library(require('./dialogs/actions'));
+bot.library(require('./dialogs/travel'));
 
 //bot.library(require('./recognizers'));
 
